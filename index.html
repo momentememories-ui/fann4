@@ -47,7 +47,7 @@
         }
         .active { display: flex; }
 
-        /* --- PAGE 1: ENVELOPE (PARCEL THEME) --- */
+        /* --- PAGE 1: ENVELOPE --- */
         .chase-area { position: relative; width: 100%; height: 100%; }
         .flying-envelope {
             position: absolute; width: 140px; height: 90px;
@@ -91,7 +91,6 @@
         /* --- PAGE 4: GALLERY --- */
         .room-scene {
             width: 100%; height: 100%; position: relative;
-            background-color: #e2e8f0;
             background-image: url('photo6.jpg'); 
             background-size: cover; background-position: center;
         }
@@ -124,28 +123,44 @@
         .inv-slot.filled { background: white; border: 2px solid var(--primary); }
         .inv-slot.filled img { width: 100%; height: 100%; object-fit: cover; }
 
+        /* --- MODAL TRANSITION & SIZE ADJUSTMENT --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); z-index: 100;
+            background: rgba(0,0,0,0.85); z-index: 100;
             display: none; align-items: center; justify-content: center;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            opacity: 0; transition: opacity 0.3s ease;
         }
+        .modal-overlay.show { display: flex; opacity: 1; }
+
         .modal-card {
-            background: white; padding: 15px 15px 30px 15px;
-            border-radius: 10px; max-width: 280px; text-align: center;
-            animation: zoomIn 0.3s ease;
+            background: white; padding: 15px;
+            border-radius: 15px; width: 90%; max-width: 350px; 
+            text-align: center;
+            transform: scale(0.7); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
         }
-        .modal-card img { width: 100%; border-radius: 3px; margin-bottom: 15px; }
+        .modal-overlay.show .modal-card { transform: scale(1); }
+
+        .modal-card img { 
+            width: 100%; 
+            max-height: 60vh; /* รูปใหญ่พอดีหน้าจอ */
+            object-fit: contain; 
+            border-radius: 8px; 
+            margin-bottom: 15px; 
+        }
+
         .btn-keep {
             background: var(--primary); color: white; border: none;
-            padding: 10px 25px; border-radius: 30px; font-family: 'Kanit';
-            font-size: 1rem; cursor: pointer; margin-top: 15px;
+            padding: 12px 30px; border-radius: 30px; font-family: 'Kanit';
+            font-size: 1.1rem; cursor: pointer; margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(255, 92, 138, 0.3);
         }
 
         /* --- FINAL --- */
         .final-msg-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.9); z-index: 200;
+            background: rgba(255,255,255,0.95); z-index: 200;
             display: flex; align-items: center; justify-content: center;
             opacity: 0; pointer-events: none; transition: opacity 1s;
         }
@@ -172,7 +187,7 @@
                 <div class="wing left"></div><div class="env-body">🎁</div><div class="wing right"></div>
             </div>
         </div>
-        <div class="music-hint">🎵 แแตะเพื่อเปิดดูพัสดุ 🎵</div>
+        <div class="music-hint">🎵 แตะเพื่อเปิดดูพัสดุ 🎵</div>
     </div>
 
     <div id="page2" class="page">
@@ -330,20 +345,28 @@
 
         let collected = 0;
         function foundPhoto(idx, el) {
+            const modal = document.getElementById('previewModal');
             document.getElementById('previewImg').src = photos[idx-1].src;
             document.getElementById('previewCaption').innerText = photos[idx-1].caption;
-            document.getElementById('previewModal').style.display = 'flex';
+            
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('show'), 10);
+            
             window.lastFoundIdx = idx; window.lastFoundEl = el;
         }
         function confirmKeep() {
-            document.getElementById('previewModal').style.display = 'none';
-            window.lastFoundEl.style.opacity = '0';
-            const slot = document.getElementById('slot' + window.lastFoundIdx);
-            slot.classList.add('filled'); slot.innerHTML = `<img src="${photos[window.lastFoundIdx-1].src}">`;
-            collected++;
-            if(collected === 5) {
-                setTimeout(() => document.getElementById('finalMsgContainer').classList.add('show-final'), 800);
-            }
+            const modal = document.getElementById('previewModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                window.lastFoundEl.style.opacity = '0';
+                const slot = document.getElementById('slot' + window.lastFoundIdx);
+                slot.classList.add('filled'); slot.innerHTML = `<img src="${photos[window.lastFoundIdx-1].src}">`;
+                collected++;
+                if(collected === 5) {
+                    setTimeout(() => document.getElementById('finalMsgContainer').classList.add('show-final'), 800);
+                }
+            }, 300);
         }
     </script>
 </body>
