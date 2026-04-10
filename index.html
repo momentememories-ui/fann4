@@ -7,10 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #8e9aaf;
-            --secondary: #cbd5e0;
-            --accent: #4a5568;
-            --bg: #f7fafc;
+            --primary: #ff5c8a;
+            --secondary: #ffacc5;
+            --accent: #5e3040;
+            --bg: #fff5f7;
         }
 
         body {
@@ -75,17 +75,17 @@
         /* --- PAGE 2: HEART TAP --- */
         .heart-container {
             width: 220px; height: 200px; position: relative; cursor: pointer;
-            transition: transform 0.1s; filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+            transition: transform 0.1s; filter: drop-shadow(0 10px 20px rgba(255, 92, 138, 0.4));
         }
         .heart-container:active { transform: scale(0.95); }
-        .tap-msg { margin-top: 25px; color: var(--accent); font-size: 1.2rem; animation: blink 1s infinite; text-align: center; font-weight: 400; }
+        .tap-msg { margin-top: 25px; color: #ff5c8a; font-size: 1.2rem; animation: blink 1s infinite; text-align: center; font-weight: 400; }
         @keyframes blink { 50% { opacity: 0.5; } }
 
         /* --- PAGE 3: SCRATCH --- */
         .scratch-box {
             position: relative; width: 300px; height: 300px;
             border: 8px solid white; border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); overflow: hidden;
         }
 
         /* --- PAGE 4: GALLERY --- */
@@ -137,7 +137,7 @@
         }
         .modal-card img { width: 100%; border-radius: 3px; margin-bottom: 15px; }
         .btn-keep {
-            background: var(--accent); color: white; border: none;
+            background: var(--primary); color: white; border: none;
             padding: 10px 25px; border-radius: 30px; font-family: 'Kanit';
             font-size: 1rem; cursor: pointer; margin-top: 15px;
         }
@@ -145,18 +145,18 @@
         /* --- FINAL --- */
         .final-msg-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.95); z-index: 200;
+            background: rgba(255,255,255,0.9); z-index: 200;
             display: flex; align-items: center; justify-content: center;
             opacity: 0; pointer-events: none; transition: opacity 1s;
         }
         .final-msg-box {
             text-align: center; padding: 40px;
-            background: white; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            background: white; border-radius: 20px; box-shadow: 0 15px 40px rgba(255, 92, 138, 0.2);
             max-width: 85%; transform: scale(0.9); transition: 1s;
         }
         .final-msg-container.show-final { opacity: 1; pointer-events: auto; }
         .final-msg-container.show-final .final-msg-box { transform: scale(1); }
-        .final-msg-box h1 { color: var(--accent); font-size: 2rem; margin-bottom: 15px; }
+        .final-msg-box h1 { color: var(--primary); font-size: 2rem; margin-bottom: 15px; }
         .final-msg-box p { font-size: 1.1rem; line-height: 1.8; color: #555; }
     </style>
 </head>
@@ -172,7 +172,7 @@
                 <div class="wing left"></div><div class="env-body">🎁</div><div class="wing right"></div>
             </div>
         </div>
-        <div class="music-hint">🎵 แตะเพื่อเปิดดูพัสดุ 🎵</div>
+        <div class="music-hint">🎵 แแตะเพื่อเปิดดูพัสดุ 🎵</div>
     </div>
 
     <div id="page2" class="page">
@@ -180,10 +180,10 @@
             <svg viewBox="0 0 200 200" width="100%" height="100%">
                 <defs>
                     <mask id="heartMask"><path d="M100,180 C20,130 0,80 0,50 C0,20 25,0 55,0 C75,0 90,15 100,30 C110,15 125,0 145,0 C175,0 200,20 200,50 C200,80 180,130 100,180 Z" fill="white"/></mask>
-                    <linearGradient id="greyGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#94a3b8;stop-opacity:1" /><stop offset="100%" style="stop-color:#cbd5e1;stop-opacity:1" /></linearGradient>
+                    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ff9a9e;stop-opacity:1" /><stop offset="100%" style="stop-color:#fecfef;stop-opacity:1" /></linearGradient>
                 </defs>
-                <path d="M100,180 C20,130 0,80 0,50 C0,20 25,0 55,0 C75,0 90,15 100,30 C110,15 125,0 145,0 C175,0 200,20 200,50 C200,80 180,130 100,180 Z" fill="none" stroke="#4a5568" stroke-width="4" />
-                <rect x="0" y="200" width="200" height="200" fill="url(#greyGrad)" mask="url(#heartMask)" id="waterLevel"></rect>
+                <path d="M100,180 C20,130 0,80 0,50 C0,20 25,0 55,0 C75,0 90,15 100,30 C110,15 125,0 145,0 C175,0 200,20 200,50 C200,80 180,130 100,180 Z" fill="none" stroke="#ff5c8a" stroke-width="4" />
+                <rect x="0" y="200" width="200" height="200" fill="url(#pinkGrad)" mask="url(#heartMask)" id="waterLevel"></rect>
             </svg>
             <div style="position:absolute; top:45%; width:100%; text-align:center; color:#fff; font-weight:bold;"><span id="percent">0%</span></div>
         </div>
@@ -192,7 +192,7 @@
 
     <div id="page3" class="page">
         <div class="scratch-box">
-            <img src="photo7.jpg" style="width:100%; height:100%; object-fit:cover;">
+            <img src="photo1.jpg" style="width:100%; height:100%; object-fit:cover;">
             <canvas id="scratchCanvas" width="300" height="300" style="position:absolute; top:0; left:0; cursor:pointer;"></canvas>
         </div>
     </div>
@@ -223,8 +223,7 @@
         <div class="final-msg-box">
             <h1>รักนะค้าบ 🐙</h1>
             <p>คิดถึงงงมากๆเลย<br>
-            ยังไงก็โทรมาได้ตลอดนะ<br><br>
-            <strong>2026 / 2569</strong></p>
+            ยังไงก็โทรมาได้ตลอดนะ</p>
         </div>
     </div>
 
@@ -299,9 +298,9 @@
 
         function startScratch() {
             const c = document.getElementById('scratchCanvas'); const ctx = c.getContext('2d');
-            ctx.fillStyle = '#cbd5e0'; ctx.fillRect(0,0,300,300);
-            ctx.fillStyle = '#4a5568'; ctx.font = 'bold 24px Kanit'; ctx.textAlign = 'center';
-            ctx.fillText('แกะพัสดุตรงนี้เลย', 150, 150);
+            ctx.fillStyle = '#ffacc5'; ctx.fillRect(0,0,300,300);
+            ctx.fillStyle = '#5e3040'; ctx.font = 'bold 24px Kanit'; ctx.textAlign = 'center';
+            ctx.fillText('ลองขูดดูสิ', 150, 150);
             
             let isDrawing = false;
             function scratch(x,y) {
